@@ -7,7 +7,13 @@
 ![Language](https://img.shields.io/badge/Language-C-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-![实物图](05_交付产物/演示素材/项目2.0实物图.jpg)
+<p align="center">
+  <img src="assets/board-preview.jpg" width="420" alt="系统实物图">
+</p>
+
+<p align="center">
+  <sub>面包板搭建的三串锂电池监测系统：STM32F103C8T6 核心板、0.96" OLED、TB6612 驱动 + 130 电机风扇、11.1V 1800mAh 电池组</sub>
+</p>
 
 ---
 
@@ -238,6 +244,12 @@ Battery: 12.35V | Temp: 28.5C | V-ADC: 3245 | T-ADC: 2048
 [测试] 温度模拟模式: ON (35C)
 [系统] 系统已经停止
 ```
+
+串口实际输出截图：
+
+![串口输出](05_交付产物/演示素材/项目2.0串口窗口打印.png)
+
+完整运行录像见 [项目2.0演示视频.mp4](05_交付产物/演示素材/项目2.0演示视频.mp4)（19 MB）。
 
 ---
 
