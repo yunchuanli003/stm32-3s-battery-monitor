@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 <p align="center">
-  <img src="assets/board-preview.jpg" width="420" alt="系统实物图">
+  <img src="05_交付产物/演示素材/项目2.0实物图.jpg" width="420" alt="系统实物图">
 </p>
 
 <p align="center">
@@ -198,7 +198,6 @@ Project/
 ├── 05_交付产物/              # 烧录固件与演示素材
 │   ├── 固件/                 # LYC1_v2.0.hex
 │   └── 演示素材/             # 实物图、串口截图、演示视频
-├── assets/                   # README 展示用压缩版图片
 ├── CHANGELOG.md              # 版本变更日志
 ├── LICENSE
 └── README.md
