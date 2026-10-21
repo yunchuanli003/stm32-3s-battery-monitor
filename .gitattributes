@@ -13,6 +13,10 @@
 *.py       text
 *.md       text
 
+# 忽略规则与 Git 配置必须保持 LF，否则规则行尾的 \r 会导致匹配失效
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+
 # 二进制资源不做换行转换、不参与文本 diff
 *.png      binary
 *.jpg      binary
