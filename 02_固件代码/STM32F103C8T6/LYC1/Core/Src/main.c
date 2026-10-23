@@ -30,6 +30,7 @@
 
 
 #include "stdio.h"  // 用于串口打印
+#include "math.h"   // NTC B值法换算需要 logf()
 #include "oled.h"
 #include "motor.h"
 
@@ -56,14 +57,35 @@
 /* USER CODE BEGIN PV */
 
 // DMA缓冲区 - 双通道ADC数据
+// 2026-10-23 PCB 适配：通道号由 IN0/IN1 改为 IN4/IN5，缓冲索引顺序不变
 #define ADC_CHANNEL_NUM 2
-uint16_t adc_dma_buf[ADC_CHANNEL_NUM];  // [0]=CH0电池电压, [1]=CH1温度
+uint16_t adc_dma_buf[ADC_CHANNEL_NUM];  // [0]=IN4(PA4)电池电压, [1]=IN5(PA5)NTC温度
 
 uint16_t adc_value;
 float total_volt;
 // 校准后的最终参数
 const float adc_ref = 3.3f;
+// 分压比：R1 = 51kΩ(±1%) 上臂，R2 = 10kΩ(±1%) 下臂
+//   理论值 (51+10)/10 = 6.10；6.21 是上一版面包板实测校准值。
+//   新板电阻批次未必一致，首次上电要用万用表实测电池端电压与串口打印值比对，
+//   按 实测电压 / 打印电压 × 6.21 修正这个系数。
 const float divider_k = 6.21f;
+
+/* ===== NTC 温度换算参数（B 值法）=====
+ * 电路：R3 = 10 kΩ(±1%) 上拉至 +3V3，防水探头经 J7 接 GND，PA5 测中点。
+ *   V_adc = 3V3 × R_ntc / (R3 + R_ntc)
+ *   R_ntc = R3 × V_adc / (3V3 − V_adc)
+ *   1/T  = 1/T0 + ln(R_ntc / R0) / B
+ */
+#define NTC_R_PULLUP   10000.0f   // R3 上拉阻值
+#define NTC_R0         10000.0f   // 25 °C 标称阻值
+#define NTC_B          3950.0f    // B25/50 值，下单时必须核对是 3950 不是 3435
+#define NTC_T0_K       298.15f    // 25 °C 对应的绝对温度
+
+// 探头异常约定值（负温度指数，不会与真实工况混淆）
+#define TEMP_NTC_OPEN   (-99.0f)  // J7 未插探头 / 探头断线
+#define TEMP_NTC_SHORT  (-98.0f)  // 探头短路到地
+#define TEMP_NTC_BAD(t) ((t) < -90.0f)
 
 // 温度相关变量
 float temperature = 25.0f;
@@ -269,7 +291,7 @@ int main(void)
   printf("=========================================\r\n");
   printf("  Volt Range: 9.0V ~ 12.6V\r\n");
   printf("  Temp Thresholds: %.1f/%.1f/%.1f C\r\n", TEMP_FAN_OFF, TEMP_FAN_ON, TEMP_FAN_HIGH);
-  printf("  ADC: DMA Dual Channel\r\n");
+  printf("  ADC: DMA Dual Channel (IN4=Bat/PA4, IN5=NTC/PA5)\r\n");
   printf("=========================================\r\n");
   
   OLED_Clear();
@@ -323,8 +345,8 @@ while (1)
       adc_sample_cnt = 0;
       
       // 从DMA缓冲区读取数据（DMA一直在后台自动更新）
-      uint16_t adc_volt = adc_dma_buf[0];  // CH0 - 电池电压
-      uint16_t adc_temp = adc_dma_buf[1];  // CH1 - 温度
+      uint16_t adc_volt = adc_dma_buf[0];  // IN4 - 电池电压（PA4）
+      uint16_t adc_temp = adc_dma_buf[1];  // IN5 - NTC 温度（PA5）
 
       // 校准后的电压计算
       total_volt = (adc_volt * adc_ref / 4095.0f) * divider_k;
@@ -332,26 +354,61 @@ while (1)
       // 非模拟模式才读取真实温度
       if(!temp_simulate)
       {
-        // 温度计算（热敏电阻 - 简化版，实际硬件测试后校准）
-        // NTC热敏电阻：电压越低温度越高
-        // 简化估算，后续根据实际硬件校准
-        float temp_volt = (adc_temp * adc_ref / 4095.0f);
-        // 简化线性转换：25℃对应约1.65V，范围约0-50℃
-        temperature = 25.0f + (1.65f - temp_volt) * 15.0f;
-        // 限制合理范围
-        if(temperature < 0) temperature = 0;
-        if(temperature > 60) temperature = 60;
+        /* ===== NTC 温度换算（B 值法），替换原先的线性简化公式 ===== */
+        float ntc_volt = adc_temp * adc_ref / 4095.0f;
+
+        if(adc_temp > 4040)
+        {
+          // 探头未插或断线：R3 把 PA5 拉到接近 3V3（>3.256 V）
+          temperature = TEMP_NTC_OPEN;
+        }
+        else if(adc_temp < 15)
+        {
+          // 探头短路到地：PA5 接近 0 V
+          temperature = TEMP_NTC_SHORT;
+        }
+        else
+        {
+          float r_ntc   = NTC_R_PULLUP * ntc_volt / (adc_ref - ntc_volt);
+          float inv_T   = 1.0f / NTC_T0_K + logf(r_ntc / NTC_R0) / NTC_B;
+          temperature   = 1.0f / inv_T - 273.15f;
+
+          // 传感器物理范围限幅（-40 ~ 125 °C）
+          if(temperature < -40.0f) temperature = -40.0f;
+          if(temperature > 125.0f) temperature = 125.0f;
+        }
       }
 
-      // 串口打印
-      printf("Battery: %.2fV | Temp: %.1fC | V-ADC: %d | T-ADC: %d\r\n", 
-             total_volt, temperature, adc_volt, adc_temp);
+      // 串口打印（探头异常时明确标出，避免把 -99 误当成真实温度）
+      if(TEMP_NTC_BAD(temperature))
+      {
+        printf("Battery: %.2fV | Temp: NTC-- (%s) | V-ADC: %d | T-ADC: %d\r\n",
+               total_volt,
+               (temperature < -98.5f) ? "open" : "short",
+               adc_volt, adc_temp);
+      }
+      else
+      {
+        printf("Battery: %.2fV | Temp: %.1fC | V-ADC: %d | T-ADC: %d\r\n",
+               total_volt, temperature, adc_volt, adc_temp);
+      }
 
       // ========== 温控逻辑（迟滞控制）- 非模拟模式才执行 ==========
       // 风扇插在电机转轴上，电机转=风扇转
       if(!temp_simulate)
       {
-        if(temperature > TEMP_FAN_HIGH)
+        if(TEMP_NTC_BAD(temperature))
+        {
+          // 探头异常（未插/断线/短路）：没有可信温度依据，停止风扇
+          if(fan_status != 0)
+          {
+            fan_status = 0;
+            fan_speed = 0;
+            Motor_Stop();
+            printf("[Fan] Stop (NTC fault)\r\n");
+          }
+        }
+        else if(temperature > TEMP_FAN_HIGH)
         {
           // 高温：全速
           if(fan_status != 2)
@@ -397,7 +454,14 @@ while (1)
       
       // Line 2: Temperature
       OLED_ShowString(2, 0, "Tmp:", FONT_6x8);
-      snprintf(buf, sizeof(buf), "%.1fC", temperature);
+      if(TEMP_NTC_BAD(temperature))
+      {
+        snprintf(buf, sizeof(buf), "NTC--");   // 探头未接/断线/短路
+      }
+      else
+      {
+        snprintf(buf, sizeof(buf), "%.1fC", temperature);
+      }
       OLED_ShowString(2, 24, buf, FONT_6x8);
       
       // Line 4: Fan status
@@ -412,11 +476,17 @@ while (1)
         snprintf(buf, sizeof(buf), "%d%%", fan_speed);
         OLED_ShowString(4, 54, buf, FONT_6x8);
       }
-      else
+      else if(fan_status == 2)
       {
         OLED_ShowString(4, 24, "High", FONT_6x8);
         snprintf(buf, sizeof(buf), "%d%%", fan_speed);
         OLED_ShowString(4, 54, buf, FONT_6x8);
+      }
+      else
+      {
+        // fan_status == 99：退出温度模拟后的重判死区，状态尚未确定
+        // 原先这里走 else 会错误显示成 High 100%，改为占位符
+        OLED_ShowString(4, 24, " -- ", FONT_6x8);
       }
       
       // Line 6: System status + 模拟模式指示

@@ -17,13 +17,19 @@ extern "C" {
 #include "main.h"
 #include "tim.h"
 
-/* 电机控制引脚定义 */
-#define MOTOR_AIN1_PIN    GPIO_PIN_2
-#define MOTOR_AIN1_PORT   GPIOA
-#define MOTOR_AIN2_PIN    GPIO_PIN_3
-#define MOTOR_AIN2_PORT   GPIOA
-#define MOTOR_STBY_PIN    GPIO_PIN_8
-#define MOTOR_STBY_PORT   GPIOA
+/* 电机控制引脚定义
+ * 2026-10-23 PCB 适配：原 PA2/PA3/PA8 → PB12/PB13/PB14
+ *   PA2(AIN1) → PB12   U1-2
+ *   PA3(AIN2) → PB13   U2-10
+ *   PA8(STBY) → PB14   U2-9
+ * PWMA 仍在 PA6（TIM3_CH1），未变动
+ */
+#define MOTOR_AIN1_PIN    GPIO_PIN_12
+#define MOTOR_AIN1_PORT   GPIOB
+#define MOTOR_AIN2_PIN    GPIO_PIN_13
+#define MOTOR_AIN2_PORT   GPIOB
+#define MOTOR_STBY_PIN    GPIO_PIN_14
+#define MOTOR_STBY_PORT   GPIOB
 
 /* 函数声明 */
 void Motor_Init(void);
