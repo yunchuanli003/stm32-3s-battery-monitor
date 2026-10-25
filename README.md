@@ -2,6 +2,9 @@
 
 > 基于 **STM32F103C8T6** 的三串锂电池组电压/温度实时监测系统，实现过压欠压声光报警、NTC 测温、风扇自动调速与 OLED 状态显示。
 
+> [!WARNING]
+> 本项目涉及 **3S 锂电池组（标称 11.1 V，满电 12.6 V）**，操作不当有起火与灼伤风险。**必须使用带保护板（BMS）的成品电池组**，禁止短路、反接与带电插拔。动手前请先读 [安全须知](#十三安全须知操作前必读)。
+
 ![MCU](https://img.shields.io/badge/MCU-STM32F103C8T6-blue)
 ![IDE](https://img.shields.io/badge/IDE-Keil%20MDK%205-lightgrey)
 ![Language](https://img.shields.io/badge/Language-C-orange)
@@ -347,6 +350,17 @@ Battery: 12.35V | Temp: 28.5C | V-ADC: 3245 | T-ADC: 2048
 
 完整运行录像见 [项目2.0演示视频.mp4](05_交付产物/演示素材/项目2.0演示视频.mp4)（5.9 MB）。
 
+### 7.6 无硬件预览（可选）
+
+没有硬件时，`04_测试验证/测试脚本/` 下两个脚本可以预览最终效果：
+
+| 脚本 | 作用 | 默认端口 |
+|---|---|---|
+| `web_preview_server.py` | 起一个返回模拟数据的网页服务，手机浏览器可直接看 | 8080 |
+| `mock_esp_server.py` | 模拟 ESP8266 的 `/api/data` 接口，供页面联调 | 8888 |
+
+> 两个脚本都监听 `0.0.0.0` 以便手机访问，**无鉴权机制**，只返回模拟数据、不接受写入。请仅在可信网络（自家路由器）下使用，用完 `Ctrl+C` 关闭。
+
 ---
 
 ## 八、测试与验证
@@ -390,9 +404,20 @@ Battery: 12.35V | Temp: 28.5C | V-ADC: 3245 | T-ADC: 2048
 
 ## 十一、许可
 
-本项目采用 [MIT License](LICENSE) 开源。
+本项目**自写部分**（`01_文档资料/`、`02_固件代码/STM32F103C8T6/LYC1/Core/`、`04_测试验证/`、`05_交付产物/` 中的自制文件）采用 [MIT License](LICENSE) 开源。
 
-`02_固件代码/STM32F103C8T6/LYC1/Drivers/` 为 STMicroelectronics 提供的 STM32 HAL 库与 CMSIS 组件，遵循其原始许可协议（BSD-3-Clause）。
+**硬件设计文件**（`03_硬件设计/`、`05_交付产物/原理图/`、`05_交付产物/Gerber/`）采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 授权：可自由复制、修改、商用，需署名并以相同方式共享。
+
+**第三方组件**版权归原所有者，遵循各自许可证，详见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)：
+
+| 路径 | 组件 | 许可证 | 版权所有者 |
+|---|---|---|---|
+| `Drivers/STM32F1xx_HAL_Driver/` | STM32F1 HAL Driver | BSD-3-Clause | STMicroelectronics |
+| `Drivers/CMSIS/` | ARM CMSIS Core | Apache-2.0 | Arm Limited |
+| `Drivers/CMSIS/Device/ST/STM32F1xx/` | STM32F1 Device 支持包 | Apache-2.0 | STMicroelectronics |
+| `MDK-ARM/startup_stm32f103xb.s` | 启动文件 | BSD-3-Clause | STMicroelectronics |
+
+README 中出现的 STM32、STM32F103C8T6 为 STMicroelectronics International N.V. 商标；野火小智、江科大、金升阳 Mornsun、Littelfuse、嘉立创、立创EDA 等为各自所有者商标。本项目与上述公司无隶属、合作或背书关系。
 
 ---
 
@@ -403,3 +428,19 @@ Battery: 12.35V | Temp: 28.5C | V-ADC: 3245 | T-ADC: 2048
 3. **温度标定**：NTC 已采用 B 值法换算（`R3 = 10 kΩ` 上拉、`R0 = 10 kΩ`、`B = 3950`、`T0 = 298.15 K`），常温段误差约 ±1 ℃，更高精度可改查表法。**探头必须是 B = 3950**，买成 3435 会导致全量程偏移
 4. **共地检查**：接线后先用万用表确认各模块 GND 导通，再上电
 5. **探头故障识别**：J7 未插探头或探头断线时，`PA5` 被 R3 上拉到接近 3.3 V，固件判定为开路，OLED 显示 `NTC--`、串口打印 `NTC-- (open)`，风扇强制停转；探头短路到地则判定为 `short`。两种情况都不会被误当成低温而掩盖故障
+
+---
+
+## 十三、安全须知（操作前必读）
+
+本项目涉及 **3S 锂电池组（标称 11.1 V，满电 12.6 V）**，能量密度较高，操作不当有起火与灼伤风险。
+
+1. **必须使用带保护板（BMS）的成品电池组**，不要用裸电芯自行串接。板上 F1（1.5 A 自恢复保险丝）与 D2（SMBJ15CA TVS）只应对板内异常，**不能替代电池保护板**。
+2. **接线顺序**：先接 GND，再接 VBAT；拆线顺序相反。接入前用万用表确认极性与端子丝印一致。
+3. **禁止带电插拔**电池端子、电机端子、核心板。
+4. **首次上电先不接电机**：用万用表确认 `+5V`、`+3V3` 对地无短路，再插核心板。
+5. **禁止短路、挤压、穿刺、拆解电池**。鼓包、漏液、跌落的电池立即停用并按规定回收。
+6. **不得用于安全关键场合**（车载量产、医疗、消防、BMS 主保护等）。本项目是学习与验证样机，**不是经过认证的产品设计**。
+7. 本设计**未经过任何安规、EMC、环保认证**。如需商品化，须按目标市场完成 CE / FCC / CCC 等认证，并满足 RoHS 2011/65/EU、GB/T 26572 等有害物质限制要求。
+
+依据 [MIT License](LICENSE)，作者不对因使用本项目产生的任何直接或间接损失承担责任。
