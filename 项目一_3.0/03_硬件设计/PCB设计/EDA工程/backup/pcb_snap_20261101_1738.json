@@ -1,0 +1,1385 @@
+{
+  "success": true,
+  "result": {
+    "snapAt": "2026-11-01T17:40+08",
+    "counts": {
+      "comps": 36,
+      "lines": 213,
+      "vias": 9,
+      "pads": 145,
+      "pours": 2,
+      "polys": 1,
+      "texts": 0
+    },
+    "comps": [
+      {
+        "d": "J2",
+        "lib": {
+          "name": "KF301-2P接线端子",
+          "source": "",
+          "uuid": "99a28a7a5977c99b"
+        },
+        "x": 3464.5669,
+        "y": -1929.1338999999998,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "D2",
+        "lib": {
+          "name": "SMBJ15CA",
+          "source": "",
+          "uuid": "1f678f5d46522984"
+        },
+        "x": 3031.4961,
+        "y": -2086.6142,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "J1",
+        "lib": {
+          "name": "KF301-2P接线端子",
+          "source": "",
+          "uuid": "99a28a7a5977c99b"
+        },
+        "x": 295.2756,
+        "y": -669.2913,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C14",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 2244.0945,
+        "y": -767.7165,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C15",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 1240.1575,
+        "y": -3031.4961,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C8",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 3385.83,
+        "y": -472.44,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C9",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 3700.79,
+        "y": -472.44,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C12",
+        "lib": {
+          "name": "CL21A106KAYNNNE_C15850",
+          "source": "",
+          "uuid": "4f4764cea63d6688"
+        },
+        "x": 3582.68,
+        "y": -551.18,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "BUZ1",
+        "lib": {
+          "name": "HYE1206-05ST",
+          "source": "",
+          "uuid": "63901b9b9f37d6ae"
+        },
+        "x": 2125.9843,
+        "y": -2834.6457,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C1",
+        "lib": {
+          "name": "100uF25V6.3x11KM",
+          "source": "",
+          "uuid": "be8bda3742b40bdc"
+        },
+        "x": 1299.21,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C2",
+        "lib": {
+          "name": "100uF25V6.3x11KM",
+          "source": "",
+          "uuid": "be8bda3742b40bdc"
+        },
+        "x": 1948.8200000000002,
+        "y": -2244.09,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C3",
+        "lib": {
+          "name": "CL21A226MAQNNNE",
+          "source": "",
+          "uuid": "fc2d3e9f72cda845"
+        },
+        "x": 2125.98,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C4",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 1023.6199999999999,
+        "y": -826.77,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C5",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 1181.1,
+        "y": -826.77,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C6",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 2401.57,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C7",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 2559.06,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C10",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 1023.6199999999999,
+        "y": -669.29,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C11",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 1889.76,
+        "y": -885.8299999999999,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "C13",
+        "lib": {
+          "name": "CC0603KRX7R9BB104",
+          "source": "",
+          "uuid": "7de79880baf331dd"
+        },
+        "x": 3543.3100000000004,
+        "y": -1023.6199999999999,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "D1",
+        "lib": {
+          "name": "SS34",
+          "source": "",
+          "uuid": "e17127e5919b9951"
+        },
+        "x": 1003.94,
+        "y": -433.07000000000005,
+        "rot": 180,
+        "layer": 1
+      },
+      {
+        "d": "F1",
+        "lib": {
+          "name": "MF-MSMF150/24X-2",
+          "source": "",
+          "uuid": "9c73d878d306cf93"
+        },
+        "x": 688.98,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "J3",
+        "lib": {
+          "name": "CSHA101-0402A001A1AA",
+          "source": "",
+          "uuid": "feb76c9ad6a48e1d"
+        },
+        "x": 708.6614,
+        "y": -2952.7559,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "J6",
+        "lib": {
+          "name": "2.54-1x6P直针",
+          "source": "",
+          "uuid": "a32a6bdb26228c33"
+        },
+        "x": 2992.13,
+        "y": -590.55,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "LED1",
+        "lib": {
+          "name": "Φ3mm直插红色发光二极管",
+          "source": "",
+          "uuid": "5232c1ce1a5b3ec2"
+        },
+        "x": 1692.9099999999999,
+        "y": -2362.2,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "M2",
+        "lib": {
+          "name": "K7805-1000R3_C111280",
+          "source": "",
+          "uuid": "42f5a75d13c036e1"
+        },
+        "x": 1712.6,
+        "y": -433.07000000000005,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "Q1",
+        "lib": {
+          "name": "S8050",
+          "source": "",
+          "uuid": "c6887d79d54dac3f"
+        },
+        "x": 1535.43,
+        "y": -2362.2,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "R1",
+        "lib": {
+          "name": "0805W8F5102T5E",
+          "source": "",
+          "uuid": "0e2c4b8bf05d59d9"
+        },
+        "x": 1692.9099999999999,
+        "y": -767.72,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "R2",
+        "lib": {
+          "name": "0805W8F1002T5E_C17414",
+          "source": "",
+          "uuid": "9768fde78b93923a"
+        },
+        "x": 1692.9099999999999,
+        "y": -885.8299999999999,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "R3",
+        "lib": {
+          "name": "0805W8F1002T5E_C17414",
+          "source": "",
+          "uuid": "9768fde78b93923a"
+        },
+        "x": 2066.93,
+        "y": -767.72,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "R4",
+        "lib": {
+          "name": "0805W8F1002T5E_C17414",
+          "source": "",
+          "uuid": "9768fde78b93923a"
+        },
+        "x": 1338.5827,
+        "y": -2913.3858,
+        "rot": 90,
+        "layer": 1
+      },
+      {
+        "d": "R5",
+        "lib": {
+          "name": "0603WAF1001T5E",
+          "source": "",
+          "uuid": "8f4a18a428335836"
+        },
+        "x": 1692.9099999999999,
+        "y": -2165.35,
+        "rot": 90,
+        "layer": 1
+      },
+      {
+        "d": "R6",
+        "lib": {
+          "name": "0603WAF1001T5E",
+          "source": "",
+          "uuid": "8f4a18a428335836"
+        },
+        "x": 1535.43,
+        "y": -2165.35,
+        "rot": 90,
+        "layer": 1
+      },
+      {
+        "d": "SW1",
+        "lib": {
+          "name": "BX-TS-26-665CJ",
+          "source": "",
+          "uuid": "80c7fe2814886b90"
+        },
+        "x": 1574.8031,
+        "y": -2913.3858,
+        "rot": 0,
+        "layer": 1
+      },
+      {
+        "d": "U1",
+        "lib": {
+          "name": "HDR-F_2.54_1x20P",
+          "source": "",
+          "uuid": "a1243ce3aad0a4c6"
+        },
+        "x": 1916.1417000000001,
+        "y": -1923.622,
+        "rot": 180,
+        "layer": 1
+      },
+      {
+        "d": "U2",
+        "lib": {
+          "name": "HDR-F_2.54_1x20P",
+          "source": "",
+          "uuid": "a1243ce3aad0a4c6"
+        },
+        "x": 1916.1417000000001,
+        "y": -1023.6226,
+        "rot": 180,
+        "layer": 1
+      },
+      {
+        "d": "U3",
+        "lib": {
+          "name": "AMS1117-3.3(SOT-223)",
+          "source": "",
+          "uuid": "467a05193260cc32"
+        },
+        "x": 3543.3100000000004,
+        "y": -748.03,
+        "rot": 0,
+        "layer": 1
+      }
+    ],
+    "lines": [
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 2
+      },
+      {
+        "net": "AO1",
+        "layer": 2
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 2
+      },
+      {
+        "net": "+5V",
+        "layer": 2
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "+5V",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 2
+      },
+      {
+        "net": "AO2",
+        "layer": 1
+      },
+      {
+        "net": "AO2",
+        "layer": 2
+      },
+      {
+        "net": "AO2",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT",
+        "layer": 1
+      },
+      {
+        "net": "VBAT",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_F",
+        "layer": 2
+      },
+      {
+        "net": "VBAT_FUSE",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_FUSE",
+        "layer": 1
+      },
+      {
+        "net": "VBAT_FUSE",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "GND",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "+3V3_WIFI",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "Q1_B",
+        "layer": 1
+      },
+      {
+        "net": "USART3_RX",
+        "layer": 2
+      },
+      {
+        "net": "USART3_RX",
+        "layer": 2
+      },
+      {
+        "net": "PA6",
+        "layer": 1
+      },
+      {
+        "net": "PA6",
+        "layer": 1
+      },
+      {
+        "net": "PB12",
+        "layer": 2
+      },
+      {
+        "net": "PB12",
+        "layer": 2
+      },
+      {
+        "net": "Q1_C",
+        "layer": 1
+      },
+      {
+        "net": "Q1_C",
+        "layer": 1
+      },
+      {
+        "net": "Q1_C",
+        "layer": 1
+      },
+      {
+        "net": "Q1_C",
+        "layer": 1
+      },
+      {
+        "net": "LED_A",
+        "layer": 1
+      },
+      {
+        "net": "LED_A",
+        "layer": 1
+      },
+      {
+        "net": "LED_A",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 2
+      },
+      {
+        "net": "+3V3",
+        "layer": 2
+      },
+      {
+        "net": "+3V3",
+        "layer": 2
+      },
+      {
+        "net": "+3V3",
+        "layer": 2
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 1
+      },
+      {
+        "net": "AO1",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "AO2",
+        "layer": 1
+      },
+      {
+        "net": "AO2",
+        "layer": 1
+      },
+      {
+        "net": "AO2",
+        "layer": 1
+      },
+      {
+        "net": "USART3_TX",
+        "layer": 2
+      },
+      {
+        "net": "USART3_TX",
+        "layer": 2
+      },
+      {
+        "net": "PB13",
+        "layer": 2
+      },
+      {
+        "net": "PB13",
+        "layer": 2
+      },
+      {
+        "net": "PB13",
+        "layer": 2
+      },
+      {
+        "net": "PB0",
+        "layer": 2
+      },
+      {
+        "net": "PB0",
+        "layer": 2
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB1",
+        "layer": 1
+      },
+      {
+        "net": "PB0",
+        "layer": 1
+      },
+      {
+        "net": "PB0",
+        "layer": 1
+      },
+      {
+        "net": "PB0",
+        "layer": 1
+      },
+      {
+        "net": "PB0",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 2
+      },
+      {
+        "net": "PA5",
+        "layer": 2
+      },
+      {
+        "net": "PA5",
+        "layer": 2
+      },
+      {
+        "net": "PA5",
+        "layer": 2
+      },
+      {
+        "net": "PA4",
+        "layer": 2
+      },
+      {
+        "net": "PA4",
+        "layer": 2
+      },
+      {
+        "net": "PB6",
+        "layer": 2
+      },
+      {
+        "net": "PB6",
+        "layer": 2
+      },
+      {
+        "net": "PB6",
+        "layer": 2
+      },
+      {
+        "net": "PB6",
+        "layer": 2
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 1
+      },
+      {
+        "net": "PB14",
+        "layer": 2
+      },
+      {
+        "net": "PB14",
+        "layer": 2
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PA5",
+        "layer": 1
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PB7",
+        "layer": 2
+      },
+      {
+        "net": "PC13",
+        "layer": 2
+      },
+      {
+        "net": "PC13",
+        "layer": 2
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PC13",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "PA4",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "GND",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      },
+      {
+        "net": "+3V3",
+        "layer": 1
+      }
+    ],
+    "vias": [
+      {
+        "x": 1779.5276,
+        "y": -885.8268,
+        "net": "GND"
+      },
+      {
+        "x": 1964.5669,
+        "y": -885.8268,
+        "net": "GND"
+      },
+      {
+        "x": 1492.1562,
+        "y": -773.248,
+        "net": "VBAT_F"
+      },
+      {
+        "x": 2143.8546,
+        "y": -767.718,
+        "net": "PA5"
+      },
+      {
+        "x": 2074.7747,
+        "y": -1977.225,
+        "net": "PB0"
+      },
+      {
+        "x": 1907.2052000000003,
+        "y": -1103.4772,
+        "net": "PA4"
+      },
+      {
+        "x": 918.9877,
+        "y": -828.1579,
+        "net": "+5V"
+      },
+      {
+        "x": 2580.4434,
+        "y": -1870.0253,
+        "net": "PB14"
+      },
+      {
+        "x": 1353.2066,
+        "y": -2099.5947,
+        "net": "PC13"
+      }
+    ],
+    "pours": [
+      {
+        "net": "GND",
+        "layer": 1,
+        "name": null
+      },
+      {
+        "net": "GND",
+        "layer": 2,
+        "name": null
+      }
+    ],
+    "polys": [
+      {
+        "layer": 11,
+        "pts": {
+          "polygon": [
+            0,
+            -3149.61,
+            "L",
+            0,
+            787.4,
+            3937.01,
+            787.4,
+            3937.01,
+            -3149.61,
+            0,
+            -3149.61
+          ]
+        },
+        "w": 10
+      }
+    ],
+    "standalonePads": 145
+  },
+  "windowId": "7064f5a5-eeb6-43d0-bb8a-496451315aec"
+}

@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "result": [
+    {
+      "id": "a109aef8d7b0fc5e",
+      "net": "GND",
+      "layer": 1,
+      "polygon": {
+        "polygon": [
+          11.81,
+          -3137.8,
+          "L",
+          11.81,
+          775.59,
+          3925.2,
+          775.59,
+          3925.2,
+          -3137.8,
+          11.81,
+          -3137.8
+        ]
+      },
+      "method": "solid",
+      "silos": false,
+      "name": "POUR1",
+      "prio": 3,
+      "w": 0.2
+    },
+    {
+      "id": "38898271984503dd",
+      "net": "GND",
+      "layer": 2,
+      "polygon": {
+        "polygon": [
+          11.81,
+          -3137.8,
+          "L",
+          11.81,
+          775.59,
+          3925.2,
+          775.59,
+          3925.2,
+          -3137.8,
+          11.81,
+          -3137.8
+        ]
+      },
+      "method": "solid",
+      "silos": false,
+      "name": "POUR2",
+      "prio": 3,
+      "w": 0.2
+    }
+  ],
+  "windowId": "52d2dc42-fdfd-4c61-abf9-84315c015a6e"
+}

@@ -1,0 +1,26 @@
+# 统一换行符，避免跨平台协作出无意义 diff
+* text=auto
+
+# Keil / CubeMX 工程文件保持 CRLF（Windows 工具链）
+*.uvprojx  text eol=crlf
+*.uvoptx   text eol=crlf
+*.s        text eol=crlf
+*.ioc      text eol=crlf
+
+# C / 头文件按文本处理，入库统一 LF
+*.c        text
+*.h        text
+*.py       text
+*.md       text
+
+# 忽略规则与 Git 配置必须保持 LF，否则规则行尾的 \r 会导致匹配失效
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+
+# 二进制资源不做换行转换、不参与文本 diff
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.mp4      binary
+*.hex      binary
+*.pdf      binary

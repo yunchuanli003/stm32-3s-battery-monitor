@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>电池监测</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0b0f14; --card: #141b24; --line: #1f2a36;
+    --tx: #e6edf3; --tx2: #7d8799;
+    --volt: #58a6ff; --temp: #f0883e; --ok: #3fb950; --bad: #f85149;
+  }
+  body {
+    background: var(--bg); color: var(--tx);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    padding: 16px 14px calc(24px + env(safe-area-inset-bottom));
+    max-width: 520px; margin: 0 auto; min-height: 100vh;
+  }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  h1 { font-size: 17px; font-weight: 600; letter-spacing: 0.3px; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--tx2); margin-right: 6px; transition: background .3s; }
+  .dot.on { background: var(--ok); box-shadow: 0 0 8px rgba(63,185,80,.6); }
+  .dot.off { background: var(--bad); }
+  .status { font-size: 12px; color: var(--tx2); display: flex; align-items: center; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 15px; }
+  .card .label { font-size: 12px; color: var(--tx2); margin-bottom: 8px; letter-spacing: .5px; }
+  .card .value { font-size: 30px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+  .card .unit { font-size: 14px; font-weight: 400; color: var(--tx2); margin-left: 3px; }
+  .wide { grid-column: 1 / -1; }
+
+  .fan { display: flex; align-items: center; gap: 8px; }
+  .bar { flex: 1; height: 6px; background: #1c2836; border-radius: 3px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 0; background: var(--temp); border-radius: 3px; transition: width .5s ease; }
+
+  .alarm { display: none; padding: 11px 14px; border-radius: 12px; font-size: 14px; margin-bottom: 10px; font-weight: 500; }
+  .alarm.show { display: block; }
+  .alarm.over { background: rgba(248,81,73,.13); color: var(--bad); border: 1px solid rgba(248,81,73,.35); }
+  .alarm.under { background: rgba(240,136,62,.12); color: var(--temp); border: 1px solid rgba(240,136,62,.32); }
+
+  .chartbox { margin-top: 2px; }
+  canvas { width: 100%; height: 150px; display: block; }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--tx2); margin-top: 10px; }
+  .legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 5px; }
+  .foot { text-align: center; font-size: 11px; color: #55606e; margin-top: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>3S 锂电池监测</h1>
+  <div class="status"><span class="dot" id="dot"></span><span id="state">连接中…</span></div>
+</header>
+
+<div class="alarm" id="alarm"></div>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">总电压</div>
+    <div class="value" style="color:var(--volt)"><span id="v">--</span><span class="unit">V</span></div>
+  </div>
+  <div class="card">
+    <div class="label">温度</div>
+    <div class="value" style="color:var(--temp)"><span id="t">--</span><span class="unit">℃</span></div>
+  </div>
+  <div class="card wide">
+    <div class="label">风扇</div>
+    <div class="fan">
+      <div class="value" style="font-size:22px" id="fan">--</div>
+      <div class="bar"><i id="fanbar"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="card chartbox">
+  <div class="label">最近 60 秒</div>
+  <canvas id="chart"></canvas>
+  <div class="legend">
+    <span><i style="background:var(--volt)"></i>电压 V</span>
+    <span><i style="background:var(--temp)"></i>温度 ℃</span>
+  </div>
+</div>
+
+<div class="foot" id="foot">等待数据…</div>
+
+<script>
+(function () {
+  var API = "/api/data";
+  var MAXP = 60;
+  var volt = [], temp = [];
+  var online = false, gotOnce = false;
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function setOnline(ok) {
+    online = ok;
+    $("dot").className = "dot " + (ok ? "on" : "off");
+    $("state").textContent = ok ? "在线" : "已断开";
+  }
+
+  function paintChart() {
+    var cv = $("chart");
+    var dpr = window.devicePixelRatio || 1;
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if (cv.width !== w * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    var g = cv.getContext("2d");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, w, h);
+
+    // 网格
+    g.strokeStyle = "#1f2a36"; g.lineWidth = 1;
+    for (var i = 1; i < 4; i++) {
+      var y = (h / 4) * i;
+      g.beginPath(); g.moveTo(0, y); g.lineTo(w, y); g.stroke();
+    }
+
+    function line(arr, color, min, max) {
+      if (arr.length < 2) return;
+      g.strokeStyle = color; g.lineWidth = 2; g.lineJoin = "round";
+      g.beginPath();
+      for (var i = 0; i < arr.length; i++) {
+        var x = (i / (MAXP - 1)) * w;
+        var y = h - ((arr[i] - min) / (max - min)) * h;
+        if (y < 2) y = 2; if (y > h - 2) y = h - 2;
+        i === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+
+    line(volt, "#58a6ff", 8, 14);   // 8~14 V
+    line(temp, "#f0883e", 15, 45);  // 15~45 ℃
+  }
+
+  function render(d) {
+    $("v").textContent = Number(d.v).toFixed(2);
+    $("t").textContent = Number(d.t).toFixed(1);
+
+    var fanText = ["停止", "低速 50%", "高速 100%"][d.fan] || "未知";
+    $("fan").textContent = fanText;
+    $("fanbar").style.width = (d.fan === 2 ? 100 : d.fan === 1 ? 50 : 0) + "%";
+
+    var a = $("alarm");
+    if (d.alarm === 1) { a.className = "alarm show over"; a.textContent = "过压报警 · 电压高于 12.6 V"; }
+    else if (d.alarm === 2) { a.className = "alarm show under"; a.textContent = "欠压报警 · 电压低于 9.0 V"; }
+    else { a.className = "alarm"; a.textContent = ""; }
+
+    volt.push(Number(d.v)); temp.push(Number(d.t));
+    if (volt.length > MAXP) { volt.shift(); temp.shift(); }
+    paintChart();
+
+    $("foot").textContent = (d.sim ? "温度模拟模式 · " : "") + "运行 " + d.ts + " 秒 · 1 Hz 刷新";
+  }
+
+  function poll() {
+    fetch(API, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (d) {
+        gotOnce = true;
+        setOnline(true);
+        render(d);
+      })
+      .catch(function () {
+        setOnline(false);
+        if (!gotOnce) $("foot").textContent = "连不上数据源，检查是否与设备在同一网络";
+      });
+  }
+
+  setInterval(poll, 1000);
+  poll();
+  window.addEventListener("resize", paintChart);
+})();
+</script>
+</body>
+</html>
